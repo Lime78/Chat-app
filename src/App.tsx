@@ -9,7 +9,7 @@ function Chat() {
     
     <div className="parent">
      
-      <div className="child2">
+      {/* <div className="child2">
         <h1>Chat</h1>
         <div className="chat">
           <div className="message">
@@ -21,7 +21,7 @@ function Chat() {
         <input type="text" placeholder="Message" />
         <button>Send</button>
       </div>
-      </div>
+      </div> */}
       
     </div>
     </>
