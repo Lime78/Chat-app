@@ -2,7 +2,6 @@ import {
     Collection,
     Db,
     WithId,
-    ObjectId,
 } from 'mongodb'
 import { connectToDatabase } from './db'
 import { User } from '../models/users'
