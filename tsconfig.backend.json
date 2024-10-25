@@ -6,12 +6,13 @@
     "skipLibCheck": true,
 
     /* Node.js module resolution */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": false,
     "outDir": "./backendDist/",
     "rootDir": "./backendSrc",
+    
 
     /* Linting */
     "strict": true,
@@ -19,5 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["backendSrc"]
+  "include": ["backendSrc/**/*.ts"],
+  "exclude": ["node_modules"]
 }

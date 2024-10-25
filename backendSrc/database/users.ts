@@ -3,17 +3,16 @@ import {
     Db,
     WithId,
 } from 'mongodb'
-import { connectToDatabase } from './db'
-import { User } from '../models/users'
+import { connectToDatabase } from './db.js'
+import { User } from '../models/users.js'
 
 const db: Db = await connectToDatabase()
-const col: Collection<User> = db.collection<User>('användare')
+const col: Collection<User> = db.collection<User>('userInfo')
 
 // Funktion för att hämta alla användare
 export const getAllUsers = async (): Promise<WithId<User>[]> => {
     try {
-        // Hämta alla användare från kollektionen
-        const users: WithId<User>[] = await col.find().toArray();
+        const users: WithId<User>[] = await col.find({}).toArray();
         return users;
     } catch (error) {
         console.error('Error fetching users:', error);
