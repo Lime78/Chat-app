@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import LoginPage from './components/LoginPage'
 
-function Chat() {
+function App() {
   const [] = useState(0)
 
   return (
@@ -28,4 +29,4 @@ function Chat() {
   )
 }
 
-export default Chat
+export default App

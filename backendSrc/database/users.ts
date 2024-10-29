@@ -1,11 +1,13 @@
 import {
     Collection,
     Db,
+    ObjectId,
     WithId,
 } from 'mongodb'
 import { connectToDatabase } from './db.js'
 import { User } from '../models/users.js'
 
+export type UserId = ObjectId
 const db: Db = await connectToDatabase()
 const col: Collection<User> = db.collection<User>('userInfo')
 
@@ -19,3 +21,26 @@ export const getAllUsers = async (): Promise<WithId<User>[]> => {
         throw new Error('Could not fetch users');
     }
 };
+
+// Validerar lösenord och användarnamn
+async function validateUser(username: string, password: string): Promise<ObjectId | null> {
+    const db: Db = await connectToDatabase();
+    const col: Collection<User> = db.collection<User>('userCollection');
+
+    const matchingUser = await col.findOne({ username });
+
+    if (matchingUser && matchingUser.password === password) {
+        return matchingUser._id;
+    }
+    return null;
+}
+
+async function getUserData(userId: ObjectId): Promise<User | null> {
+    const db: Db = await connectToDatabase();
+    const col: Collection<User> = db.collection<User>('userCollection');
+
+    const user = await col.findOne({ _id: userId });
+    return user || null;
+}
+
+export { validateUser, getUserData };
