@@ -1,8 +1,7 @@
 import { Db } from 'mongodb';
 import { connectToDatabase } from './db.js';
 import { Channel } from '../models/channels.js';
-
-export async function getAllChannels(): Promise<Channel[]> {
+async function getAllChannels(): Promise<Channel[]> {
     try {
         const db: Db = await connectToDatabase();
         const channels = await db.collection<Channel>('channelCollection').find({}).toArray();
@@ -12,3 +11,5 @@ export async function getAllChannels(): Promise<Channel[]> {
         throw new Error('Could not fetch channels');
     }
 }
+
+export { getAllChannels };
