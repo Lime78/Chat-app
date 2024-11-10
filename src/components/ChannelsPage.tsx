@@ -100,14 +100,22 @@ const ChannelsPage: React.FC<ChannelPageProps> = ({ users, isLoggedIn, isGuest }
                     <>
                         <h2>Meddelanden i {selectedChannel.name}</h2>
                         <ul>
-                            {messages.map(message => (
-                                <Message 
-                                    key={message._id} 
-                                    message={message} 
-                                    isOwnMessage={message.sender === localStorage.getItem("USERNAME") || false} 
-                                />
-                            ))}
-                        </ul>
+                                {messages.length > 0 ? (
+                                    messages.map((message) => (
+                                        <li className="msg-card" key={message._id}>
+    										<div className="msg-header">
+        										<strong>{getUsernameById(message.sender)}</strong>
+        										<em>{new Date(message.timestamp).toLocaleString()}</em>
+    										</div>
+    										<div className="msg-content">
+       											 {message.content}
+    										</div>
+										</li>
+                                    ))
+                                ) : (
+                                    <li>Det finns inga meddelanden att visa för denna kanal.</li>
+                                )}
+                            </ul>
                     </>
                 ) : (
                     <p>Select a channel to view messages</p>
