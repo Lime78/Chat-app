@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f5f7fa;
+}
+
+main {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+main.logged-in {
+    max-width: 500px;
+    background-color: #e3f7ed;
+}
+
+h1.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-input {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-input:focus {
+    border-color: #0a74da;
+}
+
+button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#login-button {
+    background-color: #0a74da;
+    color: #fff;
+}
+
+#login-button:hover {
+    background-color: #095bb5;
+}
+
+#guest-login-button {
+    background-color: #ccc;
+    color: #333;
+}
+
+#guest-login-button:hover {
+    background-color: #bbb;
+}
+
+#logout-button {
+    background-color: #e63946;
+    color: #fff;
+}
+
+#logout-button:hover {
+    background-color: #d62828;
+}
+
+.channels-result p {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+}
+
+.channels-result p[style*="color: red"] {
+    color: #e63946;
+}
+
+.logged-in-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}

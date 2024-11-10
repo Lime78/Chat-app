@@ -10,6 +10,7 @@ const router: Router = express.Router();
 router.get('/', async (_: Request, res: Response<WithId<User>[]>) => {
     try {
         const allUsers: WithId<User>[] = await getAllUsers();
+        console.log(allUsers);
         res.send(allUsers);
     } catch (error) {
         console.error('Error fetching all users:', error);
