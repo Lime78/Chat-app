@@ -3,12 +3,12 @@ import { connectToDatabase } from "./db.js";
 import { User } from "../models/users.js";
 
 export type UserId = ObjectId;
-const db: Db = await connectToDatabase();
-const col: Collection<User> = db.collection<User>("userInfo");
 
 // Funktion för att hämta alla användare
 export const getAllUsers = async (): Promise<WithId<User>[]> => {
   try {
+    const db: Db = await connectToDatabase();
+    const col: Collection<User> = db.collection<User>("userInfo");
     const users: WithId<User>[] = await col.find({}).toArray();
     console.log("Users:", users);
     return users;
@@ -24,7 +24,7 @@ async function validateUser(
   password: string
 ): Promise<ObjectId | null> {
   const db: Db = await connectToDatabase();
-  const col: Collection<User> = db.collection<User>("userCollection");
+  const col: Collection<User> = db.collection<User>("userInfo");
 
   const matchingUser = await col.findOne({ username });
 
@@ -36,20 +36,25 @@ async function validateUser(
 
 async function getUserData(userId: ObjectId): Promise<User | null> {
   const db: Db = await connectToDatabase();
-  const col: Collection<User> = db.collection<User>("userCollection");
+  const col: Collection<User> = db.collection<User>("userInfo");
 
   const user = await col.findOne({ _id: userId });
   return user || null;
 }
 
 async function checkUserCredentials(username: string, password: string) {
+  const db: Db = await connectToDatabase();
+  const col: Collection<User> = db.collection<User>("userInfo");
   console.log("!!! CREDS !!!: ", username, password);
   const user = await col.findOne({ username: username });
+
 
   return user || null;
 }
 
 async function logInUser(id: ObjectId) {
+  const db: Db = await connectToDatabase();
+  const col: Collection<User> = db.collection<User>("userInfo");
   console.log("!!! logInUser !!!");
   const updatedUser = await col.updateOne(
     { _id: new ObjectId(id) },

@@ -138,7 +138,7 @@ const LoginLogout = ({ setIsLoggedIn }: { setIsLoggedIn: (status: boolean) => vo
                 {successMessage && <p>{successMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {isLoggedIn && channels.length > 0 && (
-                    <ChannelsPage channels={channels} isLoggedIn={isLoggedIn} isGuest={isGuest} />
+                    <ChannelsPage channels={ channels } isLoggedIn={isLoggedIn} isGuest={isGuest}/>
                 )}
             </div>
         </div>
