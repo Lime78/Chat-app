@@ -1,0 +1,32 @@
+[
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b15" },
+      "username": "user1",
+      "password": "password1",
+      "isLoggedIn": true
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b17" },
+      "username": "user2",
+      "password": "password2",
+      "isLoggedIn": false
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b19" },
+      "username": "user3",
+      "password": "password3",
+      "isLoggedIn": true
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b21" },
+      "username": "user4",
+      "password": "password4",
+      "isLoggedIn": false
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b16" },
+      "username": "user5",
+      "password": "password5",
+      "isLoggedIn": true
+    }
+  ]

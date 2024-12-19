@@ -1,0 +1,30 @@
+[
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b12" },
+      "content": "Hello! How are you?",
+      "senderId": { "$oid": "64c8821a4d9f9c5c4d4b3b15" },
+      "recipientId": { "$oid": "64c8821a4d9f9c5c4d4b3b16" },
+      "isDirectMessage": true
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b13" },
+      "content": "Lets meet tomorrow at noon.",
+      "senderId": { "$oid": "64c8821a4d9f9c5c4d4b3b17" },
+      "recipientId": { "$oid": "64c8821a4d9f9c5c4d4b3b18" },
+      "isDirectMessage": true
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b14" },
+      "content": "Can you send me the report?",
+      "senderId": { "$oid": "64c8821a4d9f9c5c4d4b3b19" },
+      "recipientId": { "$oid": "64c8821a4d9f9c5c4d4b3b20" },
+      "isDirectMessage": false
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b15" },
+      "content": "Sure, Ill do it by tonight.",
+      "senderId": { "$oid": "64c8821a4d9f9c5c4d4b3b21" },
+      "recipientId": { "$oid": "64c8821a4d9f9c5c4d4b3b22" },
+      "isDirectMessage": true
+    }
+  ]
