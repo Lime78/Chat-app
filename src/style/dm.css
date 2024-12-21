@@ -1,0 +1,115 @@
+.dm-chat-container {
+    padding: 2.5em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dm-chat-header {
+    margin-bottom: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 2em;
+  }
+  
+  .dm-chat-main {
+    display: flex;
+    flex-direction: column;
+    /*align-items: start;*/
+    width: 100%;
+    /* margin-left: 5em; */
+  }
+  
+  .dm-chat-conversation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .dm-chat-conversation > * {
+    margin-top: 1em;
+  }
+  
+  .dm-chat-conversation :first-child {
+    margin-top: 0;
+  }
+  
+  .dm-chat-message {
+    border: 1px solid white;
+    border-radius: 0.5em;
+    text-align: start;
+  }
+  
+  .dm-chat-message-container {
+    padding-top: 1em;
+  }
+  .dm-chat-message-container.received {
+    align-self: flex-start;
+    margin-left: 1em;
+  
+    .dm-chat-message {
+      background-color: rgb(85, 93, 131);
+    }
+  }
+  
+  .dm-chat-message-container.sent {
+    align-self: flex-end;
+    margin-right: 1em;
+  
+    .dm-chat-message {
+      background-color: #8aa1c9;
+    }
+  }
+  
+  .dm-chat-message {
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+  }
+  .dm-chat-input-container {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 0.4em;
+    overflow: hidden;
+    margin-top: 3.5em;
+    background-color: inherit;
+  }
+  
+  .dm-chat-input {
+    flex: 1;
+    padding: 0.5em;
+    border: none;
+    background-color: inherit;
+    min-width: 0;
+    outline: none;
+    margin: 0;
+  }
+  
+  .send-button {
+    background-color: #4c8069;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    color: white;
+    width: 80px;
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 501px) {
+    .dm-chat-message-container.received {
+      align-self: flex-start;
+      margin-left: 1em;
+    }
+  
+    .dm-chat-message-container.sent {
+      align-self: flex-start;
+      margin-left: 1em;
+    }
+  }

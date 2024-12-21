@@ -1,0 +1,64 @@
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min(100% - 30px);
+    margin-inline: auto;
+    height: 100%;
+    border-radius: 1em;
+    padding: 3em;
+  }
+  
+  .label-username,
+  .label-password,
+  .button-container {
+    padding: 2em;
+  }
+  
+  .label-password {
+    padding-top: 0;
+  }
+  
+  .label-username,
+  .label-password {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  
+  .button-container button {
+    padding: 0.5em;
+    width: 14em;
+  }
+  
+  .guest-button {
+    width: 15em;
+  }
+  
+  input {
+    padding: 0.5em;
+    margin-top: 0.6em;
+  }
+  
+  .guest-button {
+    text-align: center;
+  }
+  
+  .button-container :last-child {
+    margin-top: 1em;
+  }

@@ -29,8 +29,10 @@ async function validateUser(
   const matchingUser = await col.findOne({ username });
 
   if (matchingUser && matchingUser.password === password) {
+    console.log("User validated:", matchingUser._id);
     return matchingUser._id;
   }
+  console.log("User validation failed for username:", username);
   return null;
 }
 
