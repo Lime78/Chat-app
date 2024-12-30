@@ -4,7 +4,7 @@ import { router as userRouter } from './routes/users.js'
 import { router as channelRouter } from './routes/channels.js'
 import { router as messagesRouter } from './routes/messages.js'
 import { authenticateToken } from './routes/authMiddleware.js'
-import { router as loginRouter } from './routes/login.js'
+// import { router as loginRouter } from './routes/login.js'
 import { router as authRouter } from './routes/auth.js'
 
 const app: Express = express()
@@ -20,8 +20,8 @@ app.use('/', (req: Request, __: Response, next: NextFunction) => {
 })
 app.use('/api/auth', authRouter)
 
-app.use('/api/userInfo', userRouter)
-app.use('/api/channels', channelRouter)
+app.use('/api/userInfo', authenticateToken, userRouter)
+app.use('/api/channels', authenticateToken, channelRouter)
 app.use('/api/messages', authenticateToken, messagesRouter)
 // app.use('/api/login', loginRouter)
 

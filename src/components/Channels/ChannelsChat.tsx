@@ -62,7 +62,7 @@ const ChannelChat: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/users', {
+        const response = await fetch('/api/userInfo', {
           headers: isGuest
             ? {}
             : {
@@ -120,10 +120,10 @@ const ChannelChat: React.FC = () => {
     <div className="channel-chat-container">
       <header className="channel-chat-header">
         <button onClick={handleBack} className="back-button">
-          ← Back
+          ← Backa
         </button>
         <h2 className="channel-chat-header-rubric">
-          Welcome to {channelName} Channel
+          Välkommen till {channelName} Kanal
         </h2>
       </header>
 

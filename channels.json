@@ -13,6 +13,11 @@
       "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b14" },
       "name": "Sample Item 3",
       "isPrivate": false
+    },
+    {
+      "_id": { "$oid": "64c8821a4d9f9c5c4d4b3b11" },
+      "name": "Sample Item 4",
+      "isPrivate": false
     }
   ]
   
