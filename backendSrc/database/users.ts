@@ -67,16 +67,3 @@ async function logInUser(id: ObjectId) {
 }
 
 export { validateUser, getUserData, checkUserCredentials, logInUser };
-
-
-// import { Collection, Db, WithId } from 'mongodb'
-
-// import { User } from '../models/users.js'
-// import { connectToDatabase } from './db.js'
-
-// export const getUsers = async (): Promise<WithId<User>[]> => {
-//   const db: Db = await connectToDatabase()
-//   const col: Collection<User> = db.collection<User>('Users')
-//   const result: WithId<User>[] = await col.find({}).toArray()
-//   return result
-// }

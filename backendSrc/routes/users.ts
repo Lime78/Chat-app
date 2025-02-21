@@ -3,7 +3,6 @@ import { WithId } from 'mongodb';
 import { User } from '../models/users.js';
 import { getAllUsers } from '../database/users.js';
 
-
 const router: Router = express.Router();
 
 // Route för att hämta alla användare

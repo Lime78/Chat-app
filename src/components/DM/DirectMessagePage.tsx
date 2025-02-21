@@ -15,7 +15,6 @@ const DirectMessagePage: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log('UseEffect user:')
     if (!isGuest && users.length === 0) {
       const fetchUserInfo = async () => {
         try {
@@ -40,7 +39,6 @@ const DirectMessagePage: React.FC = () => {
   if (isGuest) {
     return null
   }
-  console.log('JSX')
 
   return (
     <div className="dm-container">

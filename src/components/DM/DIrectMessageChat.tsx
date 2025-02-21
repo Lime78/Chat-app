@@ -3,17 +3,15 @@ import '../../style/channel.css';
 import { useParams } from 'react-router-dom';
 import { Message } from '../../stores/messages';
 import { useUserStore } from '../../stores/login';
-import { useChannelStore } from '../../stores/channel';
 import { useMessageStore } from '../../stores/messages';
 import { useNavigate } from 'react-router-dom';
 
-const ChannelChat: React.FC = () => {
+const DirectMessageChat: React.FC = () => {
   const [messageList, setMessageList] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
-  const { channelId } = useParams<{ channelId: string }>();
+  const { userId } = useParams<{ userId: string }>();
   const currentUserId = localStorage.getItem('currentUserId') || 'guest';
   const users = useUserStore((state) => state.users);
-  const channels = useChannelStore((state) => state.channels);
   const isGuest = useUserStore((state) => state.isGuest);
   const setUsers = useUserStore((state) => state.setUsers);
   const addMessage = useMessageStore((state) => state.addMessage);
@@ -23,24 +21,17 @@ const ChannelChat: React.FC = () => {
     return map;
   }, {});
 
-  const channelMap = channels.reduce(
-    (map: { [key: string]: string }, channel) => {
-      map[channel._id.toString()] = channel.name;
-      return map;
-    },
-    {}
-  );
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
 
-  const channelName = channelId ? channelMap[channelId] : 'Unknown channel';
+  const recipientName = userId ? userMap[userId] : 'Unknown User';
 
   useEffect(() => {
-    const fetchChannelMessages = async () => {
+    const fetchDirectMessages = async () => {
       try {
-        const response = await fetch(`/api/channels/${channelId}/messages`, {
+        const response = await fetch(`/api/messages/contacts?otherUserId=${userId}`, {
           headers: isGuest
             ? {}
             : {
@@ -48,16 +39,16 @@ const ChannelChat: React.FC = () => {
               },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch channel messages');
+          throw new Error('Failed to fetch direct messages');
         }
         const data = await response.json();
         setMessageList(data);
       } catch (error) {
-        console.error('Error fetching channel messages:', error);
+        console.error('Error fetching direct messages:', error);
       }
     };
-    fetchChannelMessages();
-  }, [channelId, currentUserId, isGuest]);
+    fetchDirectMessages();
+  }, [userId, currentUserId, isGuest]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -88,12 +79,12 @@ const ChannelChat: React.FC = () => {
     const messageData = {
       content: newMessage,
       senderId: currentUserId,
-      channelId: channelId || '',
-      isDirectMessage: false,
+      recipientId: userId || '',
+      isDirectMessage: true,
     };
 
     try {
-      const response = await fetch('/api/messages?guest=true', {
+      const response = await fetch('/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +114,7 @@ const ChannelChat: React.FC = () => {
           ← Back
         </button>
         <h2 className="channel-chat-header-rubric">
-          Welcome to {channelName} Channel
+          Direct Messages with {recipientName}
         </h2>
       </header>
 
@@ -167,4 +158,4 @@ const ChannelChat: React.FC = () => {
   );
 };
 
-export default ChannelChat;
+export default DirectMessageChat;

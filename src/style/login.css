@@ -62,3 +62,8 @@
   .button-container :last-child {
     margin-top: 1em;
   }
+
+  .input-error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+  }

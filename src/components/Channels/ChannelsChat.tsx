@@ -1,41 +1,41 @@
-import React, { FormEvent, useEffect, useState } from 'react'
-import '../../style/channel.css'
-import { useParams } from 'react-router-dom'
-import { Message } from '../../stores/messages'
-import { useUserStore } from '../../stores/login'
-import { useChannelStore } from '../../stores/channel'
-import { useMessageStore } from '../../stores/messages'
-import { useNavigate } from 'react-router-dom'
+import React, { FormEvent, useEffect, useState } from 'react';
+import '../../style/channel.css';
+import { useParams } from 'react-router-dom';
+import { Message } from '../../stores/messages';
+import { useUserStore } from '../../stores/login';
+import { useChannelStore } from '../../stores/channel';
+import { useMessageStore } from '../../stores/messages';
+import { useNavigate } from 'react-router-dom';
 
 const ChannelChat: React.FC = () => {
-  const [messageList, setMessageList] = useState<Message[]>([])
-  const [newMessage, setNewMessage] = useState('')
-  const { channelId } = useParams<{ channelId: string }>()
-  const currentUserId = localStorage.getItem('currentUserId') || 'guest'
-  const users = useUserStore((state) => state.users)
-  const channels = useChannelStore((state) => state.channels)
-  const isGuest = useUserStore((state) => state.isGuest)
-  const setUsers = useUserStore((state) => state.setUsers)
-  const addMessage = useMessageStore((state) => state.addMessage)
+  const [messageList, setMessageList] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState('');
+  const { channelId } = useParams<{ channelId: string }>();
+  const currentUserId = localStorage.getItem('currentUserId') || 'guest';
+  const users = useUserStore((state) => state.users);
+  const channels = useChannelStore((state) => state.channels);
+  const isGuest = useUserStore((state) => state.isGuest);
+  const setUsers = useUserStore((state) => state.setUsers);
+  const addMessage = useMessageStore((state) => state.addMessage);
 
   const userMap = users.reduce((map: { [key: string]: string }, user) => {
-    map[user._id.toString()] = user.username
-    return map
-  }, {})
+    map[user._id.toString()] = user.username;
+    return map;
+  }, {});
 
   const channelMap = channels.reduce(
     (map: { [key: string]: string }, channel) => {
-      map[channel._id.toString()] = channel.name
-      return map
+      map[channel._id.toString()] = channel.name;
+      return map;
     },
     {}
-  )
-  const navigate = useNavigate()
+  );
+  const navigate = useNavigate();
   const handleBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
-  const channelName = channelId ? channelMap[channelId] : 'Unknown channel'
+  const channelName = channelId ? channelMap[channelId] : 'Unknown channel';
 
   useEffect(() => {
     const fetchChannelMessages = async () => {
@@ -46,18 +46,18 @@ const ChannelChat: React.FC = () => {
             : {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
-        })
+        });
         if (!response.ok) {
-          throw new Error('Failed to fetch channel messages')
+          throw new Error('Failed to fetch channel messages');
         }
-        const data = await response.json()
-        setMessageList(data)
+        const data = await response.json();
+        setMessageList(data);
       } catch (error) {
-        console.error('Error fetching channel messages:', error)
+        console.error('Error fetching channel messages:', error);
       }
-    }
-    fetchChannelMessages()
-  }, [channelId, currentUserId])
+    };
+    fetchChannelMessages();
+  }, [channelId, currentUserId, isGuest]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -68,53 +68,53 @@ const ChannelChat: React.FC = () => {
             : {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
               },
-        })
+        });
         if (!response.ok) {
-          throw new Error('Failed to fetch users')
+          throw new Error('Failed to fetch users');
         }
-        const data = await response.json()
-        setUsers(data)
+        const data = await response.json();
+        setUsers(data);
       } catch (error) {
-        console.error('Error is:', error)
+        console.error('Error is:', error);
       }
-    }
-    fetchUsers()
-  }, [isGuest, setUsers])
+    };
+    fetchUsers();
+  }, [isGuest, setUsers]);
 
   const handleSendMessage = async (e: FormEvent) => {
-    e.preventDefault()
-    if (!newMessage.trim()) return
+    e.preventDefault();
+    if (!newMessage.trim()) return;
 
     const messageData = {
       content: newMessage,
       senderId: currentUserId,
       channelId: channelId || '',
       isDirectMessage: false,
-    }
+    };
 
     try {
-      const response = await fetch('/api/messages?guest=true', {
+      const response = await fetch('/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(messageData),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        throw new Error('Failed to send message');
       }
 
-      const { messageId } = await response.json()
-      const message: Message = { _id: messageId, ...messageData }
-      addMessage(message)
-      setMessageList((prev: Message[]) => [...prev, message])
-      setNewMessage('')
+      const { messageId } = await response.json();
+      const message: Message = { _id: messageId, ...messageData };
+      addMessage(message);
+      setMessageList((prev: Message[]) => [...prev, message]);
+      setNewMessage('');
     } catch (error) {
-      console.error('Error sending message:', error)
+      console.error('Error sending message:', error);
     }
-  }
+  };
 
   return (
     <div className="channel-chat-container">
@@ -159,12 +159,12 @@ const ChannelChat: React.FC = () => {
             onChange={(e) => setNewMessage(e.target.value)}
           />
           <button type="submit" className="send-button">
-            Send
+            Skicka
           </button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default ChannelChat
+export default ChannelChat;
