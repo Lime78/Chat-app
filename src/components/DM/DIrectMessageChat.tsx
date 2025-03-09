@@ -7,7 +7,6 @@ import { useMessageStore } from '../../stores/messages';
 import { useNavigate } from 'react-router-dom';
 
 const DirectMessageChat: React.FC = () => {
-  const [messageList, setMessageList] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const { userId } = useParams<{ userId: string }>();
   const currentUserId = localStorage.getItem('currentUserId') || 'guest';
@@ -15,6 +14,8 @@ const DirectMessageChat: React.FC = () => {
   const isGuest = useUserStore((state) => state.isGuest);
   const setUsers = useUserStore((state) => state.setUsers);
   const addMessage = useMessageStore((state) => state.addMessage);
+  const messages = useMessageStore((state) => state.messages);
+  const setMessages = useMessageStore((state) => state.setMessages);
 
   const userMap = users.reduce((map: { [key: string]: string }, user) => {
     map[user._id.toString()] = user.username;
@@ -42,13 +43,13 @@ const DirectMessageChat: React.FC = () => {
           throw new Error('Failed to fetch direct messages');
         }
         const data = await response.json();
-        setMessageList(data);
+        setMessages(data);
       } catch (error) {
         console.error('Error fetching direct messages:', error);
       }
     };
     fetchDirectMessages();
-  }, [userId, currentUserId, isGuest]);
+  }, [userId, currentUserId, isGuest, setMessages]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -100,7 +101,6 @@ const DirectMessageChat: React.FC = () => {
       const { messageId } = await response.json();
       const message: Message = { _id: messageId, ...messageData };
       addMessage(message);
-      setMessageList((prev: Message[]) => [...prev, message]);
       setNewMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
@@ -120,20 +120,22 @@ const DirectMessageChat: React.FC = () => {
 
       <main className="channel-chat-main">
         <ul className="channel-chat-conversation">
-          {messageList.map((message) => (
-            <li
-              key={message._id}
-              className={`channel-chat-message-container ${
-                message.senderId === currentUserId ? 'sent' : 'received'
-              }`}
-            >
-              <h3 className="channel-chat-message-username">
-                {userMap[message.senderId] ||
-                  (message.senderId === 'guest' ? 'Guest' : 'Unknown User')}
-              </h3>
-              <p className="channel-chat-message">{message.content}</p>
-            </li>
-          ))}
+          {messages
+            .filter((message) => message.isDirectMessage && (message.senderId === currentUserId || message.recipientId === currentUserId))
+            .map((message) => (
+              <li
+                key={message._id}
+                className={`channel-chat-message-container ${
+                  message.senderId === currentUserId ? 'sent' : 'received'
+                }`}
+              >
+                <h3 className="channel-chat-message-username">
+                  {userMap[message.senderId] ||
+                    (message.senderId === 'guest' ? 'Guest' : 'Unknown User')}
+                </h3>
+                <p className="channel-chat-message">{message.content}</p>
+              </li>
+            ))}
         </ul>
       </main>
 
